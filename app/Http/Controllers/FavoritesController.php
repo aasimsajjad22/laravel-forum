@@ -20,6 +20,19 @@ class FavoritesController extends Controller
     public function store(Reply $reply)
     {
         $reply->favorite();
+        if (request()->expectsJson()) {
+            return response(['status' => 'Reply favorited']);
+        }
         return back();
+    }
+
+    /**
+     * Delete the favorite.
+     *
+     * @param Reply $reply
+     */
+    public function destroy(Reply $reply)
+    {
+        $reply->unfavorite();
     }
 }

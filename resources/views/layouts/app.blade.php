@@ -19,10 +19,18 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
+    <script>
+        window.App = {!! json_encode([
+            'signedIn' => Auth::check(),
+            'user' => Auth::user(),
+        ]) !!};
+    </script>
+
     <style>
         body { padding-bottom: 100px; }
         .level { display: flex; align-items: center; }
         .flex { flex: 1; }
+        [v-cloak] { display: none; }
     </style>
 
 </head>
@@ -51,6 +59,7 @@
                                     <a class="dropdown-item" href="/threads?by={{ auth()->user()->name }}">My Threads</a>
                                 @endif
                                 <a class="dropdown-item" href="/threads?popular=1">Popular Threads</a>
+                                <a class="dropdown-item" href="/threads?unanswered=1">Unanswered Threads</a>
 
                             </div>
                         </li>
